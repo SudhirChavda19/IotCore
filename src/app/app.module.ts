@@ -15,6 +15,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from '@angular/material/card';
+import { DevicecardComponent } from './dashboard/devicecard/devicecard.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
     NavbarComponent,
     MydeviceComponent,
     RegisterDeviceComponent,
+    DevicecardComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,9 @@ import { MatInputModule } from '@angular/material/input';
     MatSelectModule,
     MatDialogModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTabsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

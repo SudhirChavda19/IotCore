@@ -1,4 +1,39 @@
 <div class="container">
-  <h1>Register New Device</h1>
-  
+    <h1>Register New Device</h1>
+    <form class="registerform">
+        <mat-form-field appearance="outline">
+        <mat-label>Device Type</mat-label>
+        <mat-select>
+          <mat-option value="one">Fan</mat-option>
+          <mat-option value="two">LED</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br/>
+   
+    <mat-form-field appearance="outline">
+        <mat-label>Device Brand</mat-label>
+        <mat-select>
+            <mat-option value="one">Syska</mat-option>
+            <mat-option value="two">Crompton</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br/>
+    <mat-form-field appearance="outline">
+        <mat-label>Device Wattage</mat-label>
+        <mat-select>
+            <mat-option value="one">8W</mat-option>
+            <mat-option value="two">10W</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br/>
+        <mat-form-field appearance="outline">
+            <mat-label>Device Name</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <br/>
+        <button mat-raised-button color="primary">
+            Register
+          </button>
+   
+</form>
 </div>

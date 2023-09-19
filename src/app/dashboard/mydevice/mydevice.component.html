@@ -1,6 +1,12 @@
 <div class="main">
-        <button class="registerbtn"
-        mat-raised-button (click)="openSignInDialog()" ><mat-icon>add</mat-icon>
-        Register New Device
-    </button>
+    <div class="tabs">
+        <mat-tab-group>
+            <mat-tab label="LED"> <app-devicecard></app-devicecard> </mat-tab>
+            <mat-tab label="Fan"> Fan </mat-tab>
+            <mat-tab label="AC"> AC </mat-tab>
+          </mat-tab-group>
+    </div>
+    <div class="alldevices">
+        
+    </div>
 </div>

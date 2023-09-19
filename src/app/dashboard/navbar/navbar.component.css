@@ -1,14 +1,27 @@
 .example-spacer {
     flex: 1 1 auto;
   }
+
+  .navbar {
+    background-color: #00b8d4;
+
+  }
   
-.mat-toolbar { 
+.mat-toolbar {
     display:flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
     height: 100px;
+    width: 60%;
+    background-color: #00b8d4;
+    margin: 0 auto;
+    padding: 0;
 }
 .title {
+    flex-basis: 772px;
+    font-weight:bold;
     font-size: x-large;
+}
+
+.registerbtn {
+    
 }

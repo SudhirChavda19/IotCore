@@ -1,0 +1,19 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  height: 300px;
+  width: 97%;
+  margin: 14px auto;
+  padding: 12px;
+}   
+
+.devicephoto {
+  /* border: 1px solid black;    */
+  padding: 58px 10px 0 10px;
+}
+
+.devicedata {
+  /* border: 1px solid black; */
+  padding-left: 50px;
+
+}
