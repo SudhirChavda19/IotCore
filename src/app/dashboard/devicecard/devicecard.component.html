@@ -1,10 +1,49 @@
-<mat-card class="card">
-  <div class="devicephoto"><img src="../../../assets/ac.jpeg" width="400px" alt="device image"></div>
+<mat-card class="card" *ngFor="let thing of filteredData">
+  <div class="devicephoto">
+    <img src="../../../assets/ac.jpeg" width="400px" alt="device image" />
+  </div>
   <div class="devicedata">
-    <h2>Hall AC</h2>
-    <h4>Device Brand : Syska</h4>
-    <h4>Wattage : 40W</h4>
-    <h4>Power Consume : 12 Unit</h4>
-    <h4>Status : ON</h4>
+    <!-- <h2>{{ thing.ThingName.S }}</h2>
+    <p>Device Brand : {{ thing.ThingBrand.S }}</p>
+    <p>Wattage : {{ thing.Wattage.N }}W</p>
+    <p>Power Consume : {{ thing.PowerConsume.N }}</p>
+    <p style="margin-bottom: 2px">Status : {{ thing.Status.S }}</p> -->
+    <div class="temperature">
+      <p>Temperature :</p>
+      <div class="indectemp">
+        <!-- <mat-icon class="icon" (click)="increaseTemperature()">add</mat-icon>
+        <span style="margin: auto 20px">{{temperature}}</span>
+        <mat-icon class="icon" (click)="decreaseTemperature()">remove</mat-icon> -->
+      </div>
+      <!-- <button [disabled]="!isPower" (click)="setTemperature(temperature, thing.ThingId.N)"
+        mat-raised-button
+        style="
+          background-color: rgb(255, 255, 255);
+          box-shadow: 1px 6px 14px rgb(94, 93, 93);
+          border-radius: 18px;
+          padding: 8px;
+          margin: auto 12px;
+          height: 40px;
+        "
+      >
+        SET
+      </button> -->
+    </div>
+  </div>
+  <div class="h2nswitch">
+    <div class="toggleWrapper">
+      <!-- <input
+        type="checkbox"
+        name="toggle1"
+        class="mobileToggle"
+        id="toggle1"
+        [(ngModel)]="isPower"
+        (click)="powerSwitch(thing.ThingId.N)"
+      /> -->
+      <label for="toggle1"></label>
+    </div>
+    <span style="color: red; cursor: pointer; margin: 4px"
+      ><mat-icon>clear</mat-icon></span
+    >
   </div>
 </mat-card>

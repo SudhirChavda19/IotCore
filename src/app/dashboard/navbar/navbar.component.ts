@@ -10,7 +10,7 @@ import { RegisterDeviceComponent } from '../register-device/register-device.comp
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,) {}
 
   openSignInDialog(): void {
     const dialogRef = this.dialog.open(RegisterDeviceComponent, {

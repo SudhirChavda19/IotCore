@@ -1,12 +1,7 @@
 <div class="main">
-    <div class="tabs">
+    <div class="tabs" >
         <mat-tab-group>
-            <mat-tab label="LED"> <app-devicecard></app-devicecard> </mat-tab>
-            <mat-tab label="Fan"> Fan </mat-tab>
-            <mat-tab label="AC"> AC </mat-tab>
+            <mat-tab *ngFor="let type of deviceType" label={{type}}> <app-devicecard [deviceType]="type"></app-devicecard> </mat-tab>
           </mat-tab-group>
-    </div>
-    <div class="alldevices">
-        
     </div>
 </div>

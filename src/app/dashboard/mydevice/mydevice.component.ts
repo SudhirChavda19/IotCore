@@ -10,6 +10,14 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./mydevice.component.css'],
 })
 export class MydeviceComponent {
+
+ 
   constructor(public dialog: MatDialog) {}
+
+  public deviceType = ["Fan", "LED", "AC"]
+  ngOnInit() {
+    
+  }
+
 
 }
