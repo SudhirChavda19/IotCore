@@ -7,6 +7,7 @@ import { SmarthomeService } from 'src/app/services/smarthome.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackbarConfigService } from 'src/app/services/snackbar-config.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-device',
@@ -25,6 +26,7 @@ export class RegisterDeviceComponent {
     private snackbar: SnackbarConfigService,
     public dialogRef: MatDialogRef<RegisterDeviceComponent>,
     private snackBar: MatSnackBar,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {}
@@ -85,9 +87,9 @@ export class RegisterDeviceComponent {
         next: (result) => {
           console.log(result);
 
-          this.snackBar.open(result.message, 'Dismiss', this.snackbar.commonSnackBarConfig);
           this.dialogRef.close();
-          location.reload()
+          this.router.navigate(['device-card']);
+          this.snackBar.open(result.message, 'Dismiss', this.snackbar.commonSnackBarConfig);
         },
         error: (err) => {
           alert('Error while sending the data ' + err);

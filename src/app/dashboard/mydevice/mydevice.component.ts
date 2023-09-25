@@ -11,13 +11,14 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class MydeviceComponent {
 
- 
+ public deviceType : any = ["AC", "Fan", "LED"] 
   constructor(public dialog: MatDialog) {}
 
-  public deviceType = ["Fan", "LED", "AC"]
+    
   ngOnInit() {
     
   }
+
 
 
 }

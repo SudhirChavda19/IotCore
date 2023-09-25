@@ -3,19 +3,19 @@
     <img src="../../../assets/ac.jpeg" width="400px" alt="device image" />
   </div>
   <div class="devicedata">
-    <!-- <h2>{{ thing.ThingName.S }}</h2>
-    <p>Device Brand : {{ thing.ThingBrand.S }}</p>
-    <p>Wattage : {{ thing.Wattage.N }}W</p>
-    <p>Power Consume : {{ thing.PowerConsume.N }}</p>
-    <p style="margin-bottom: 2px">Status : {{ thing.Status.S }}</p> -->
-    <div class="temperature">
+    <h2>{{ thing.device?.ThingName.S }}</h2>
+    <p>Device Brand : {{ thing.device?.ThingBrand.S }}</p>
+    <p>Wattage : {{ thing.device?.Wattage.N }}W</p>
+    <p>Power Consume : {{ thing.device?.PowerConsume.N }}</p>
+    <p style="margin-bottom: 2px">Status : {{ thing.device?.Status.S }}</p>
+    <div class="temperature" *ngIf="thing.device.ThingType?.S === 'AC'">
       <p>Temperature :</p>
       <div class="indectemp">
-        <!-- <mat-icon class="icon" (click)="increaseTemperature()">add</mat-icon>
-        <span style="margin: auto 20px">{{temperature}}</span>
-        <mat-icon class="icon" (click)="decreaseTemperature()">remove</mat-icon> -->
+        <mat-icon class="icon" (click)="increaseTemperature(thing)">add</mat-icon>
+        <span style="margin: auto 20px">{{thing.temperature}}</span>
+        <mat-icon class="icon" (click)="decreaseTemperature(thing)">remove</mat-icon>
       </div>
-      <!-- <button [disabled]="!isPower" (click)="setTemperature(temperature, thing.ThingId.N)"
+      <button [disabled]="!thing.isPower" (click)="setTemperature(thing, thing.device.ThingId.N)"
         mat-raised-button
         style="
           background-color: rgb(255, 255, 255);
@@ -27,19 +27,20 @@
         "
       >
         SET
-      </button> -->
+      </button>
     </div>
   </div>
   <div class="h2nswitch">
+    <button ejs-button cssClass='e-flat' content='Button'></button>
     <div class="toggleWrapper">
-      <!-- <input
+      <input
         type="checkbox"
         name="toggle1"
-        class="mobileToggle"
         id="toggle1"
-        [(ngModel)]="isPower"
-        (click)="powerSwitch(thing.ThingId.N)"
-      /> -->
+        class="mobileToggle"
+        [(ngModel)]="thing.isPower"
+        (click)="powerSwitch(thing)"
+      />
       <label for="toggle1"></label>
     </div>
     <span style="color: red; cursor: pointer; margin: 4px"
