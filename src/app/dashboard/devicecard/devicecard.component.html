@@ -1,6 +1,28 @@
 <mat-card class="card" *ngFor="let thing of filteredData">
+  <div class="devicestatus">
+    <!-- <mat-icon>cloud_off</mat-icon> -->
+    <div class="dot" [ngClass]="[thing.active ? deviceActive : deviceDeactive]">
+    </div>
+  </div>
   <div class="devicephoto">
-    <img src="../../../assets/ac.jpeg" width="400px" alt="device image" />
+    <img
+      *ngIf="thing.device.ThingType?.S === 'AC'"
+      src="../../../assets/ac.jpeg"
+      class="img"
+      alt="device image"
+    />
+    <img
+      *ngIf="thing.device.ThingType?.S === 'Fan'"
+      src="../../../assets/fan1.jpg"
+      class="img"
+      alt="device image"
+    />
+    <img
+      *ngIf="thing.device.ThingType?.S === 'LED'"
+      src="../../../assets/led.png"
+      style="width: 350px; height: auto; margin-top: 20px;"
+      alt="device image"
+    />
   </div>
   <div class="devicedata">
     <h2>{{ thing.device?.ThingName.S }}</h2>
@@ -11,11 +33,17 @@
     <div class="temperature" *ngIf="thing.device.ThingType?.S === 'AC'">
       <p>Temperature :</p>
       <div class="indectemp">
-        <mat-icon class="icon" (click)="increaseTemperature(thing)">add</mat-icon>
-        <span style="margin: auto 20px">{{thing.temperature}}</span>
-        <mat-icon class="icon" (click)="decreaseTemperature(thing)">remove</mat-icon>
+        <mat-icon class="icon" (click)="increaseTemperature(thing)"
+          >add</mat-icon
+        >
+        <span style="margin: auto 20px">{{ thing.temperature }}</span>
+        <mat-icon class="icon" (click)="decreaseTemperature(thing)"
+          >remove</mat-icon
+        >
       </div>
-      <button [disabled]="!thing.isPower" (click)="setTemperature(thing, thing.device.ThingId.N)"
+      <button
+        [disabled]="!thing.isPower"
+        (click)="setTemperature(thing, thing.device.ThingId.N)"
         mat-raised-button
         style="
           background-color: rgb(255, 255, 255);
@@ -31,17 +59,16 @@
     </div>
   </div>
   <div class="h2nswitch">
-    <button ejs-button cssClass='e-flat' content='Button'></button>
     <div class="toggleWrapper">
-      <input
+      <input [disabled]="!thing.active"
         type="checkbox"
         name="toggle1"
-        id="toggle1"
+        id="toggle{{ thing.device?.ThingId.N }}"
         class="mobileToggle"
         [(ngModel)]="thing.isPower"
         (click)="powerSwitch(thing)"
       />
-      <label for="toggle1"></label>
+      <label style="cursor: pointer;" for="toggle{{ thing.device?.ThingId.N }}"></label>
     </div>
     <span style="color: red; cursor: pointer; margin: 4px"
       ><mat-icon>clear</mat-icon></span

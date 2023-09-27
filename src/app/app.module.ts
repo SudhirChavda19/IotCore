@@ -21,7 +21,7 @@ import { DevicecardComponent } from './dashboard/devicecard/devicecard.component
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +49,6 @@ import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

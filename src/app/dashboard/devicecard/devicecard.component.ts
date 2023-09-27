@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SmarthomeService } from 'src/app/services/smarthome.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
 @Component({
   selector: 'app-devicecard',
@@ -12,12 +11,16 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 export class DevicecardComponent {
   // public temperature: any = 25;
   public deviceId: any;
+  public dotColor:any;
+  deviceActive:string = "green";
+  deviceDeactive:string = "red";
 
   @Input() deviceType: any;
   public allThings: any[] = [];
   public filteredData: {
     device: any;
     isPower: boolean;
+    active: boolean
     temperature: number;
   }[] = [];
   constructor(
@@ -37,7 +40,8 @@ export class DevicecardComponent {
         // this.allThings = res.data.Items;
         this.allThings = res.data.Items.map((item: any) => ({
           device: item,
-          isPower: item.Status.S === 'ON', // Initialize isPower to false for each device
+          isPower: item.Status.S === 'ON',
+          active: item.DeviceStatus.S === 'online', // Initialize isPower to false for each device
           temperature: item.Temperature?.N, // Initialize temperature to 0 for each device
         }));
         console.log('ALL Thing--', this.allThings);

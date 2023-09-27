@@ -10,12 +10,18 @@
 }   
 
 .devicephoto {
-  /* border: 1px solid black; */
-  padding: 58px 10px 0 10px;
+  width:max-content;
+
+}
+
+.img{
+  width: 400px;
+  height: auto;
+  margin-top: 50px;
 }
 
 .devicedata {
-  padding-left: 50px;
+  padding-left: 15px;
   width: fit-content;
 
 }
@@ -23,7 +29,8 @@
 .temperature {
   display: flex;
   flex-direction: row;
-  width: fit-content;
+  width: 100%;
+  height: auto;
 }
 
 .indectemp {
@@ -43,23 +50,32 @@
   cursor: pointer;
   }
 
-
-
-
-
-
-
-
-
-
+  .green{
+    background-color: green;
+  }
+  .red{
+    background-color: red;
+  }
 
 .h2nswitch{
   display: flex;
   position: absolute;
   flex-direction: row;
   right: 16px;
+  align-items: center;
   /* top: 0; */
 }
+
+.dot{
+  width: 10px;
+  height: 10px;
+border-radius: 10px;
+/* border: 1px solid black; */
+  /* background-color: red; */
+  /* margin: auto 20px; */
+}
+
+
 
 
 
@@ -81,6 +97,7 @@
   margin-right: 16px; 
   border-radius: 5px;
   background: white;
+  cursor: pointer;
 }
 .toggleWrapper input.mobileToggle {
   opacity: 0;
