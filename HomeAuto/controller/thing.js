@@ -61,6 +61,7 @@ module.exports = {
                 // createThingRules(thingName, topic);
                 addThingToThingGroup(thingName, thingType);
 
+                const heartBeat = Date.now().toString();
                 const thingId = new Date().getTime().toString();
                 const createdDate = new Date().toLocaleString(undefined, {
                     timeZone: "Asia/Kolkata",
@@ -80,6 +81,8 @@ module.exports = {
                         Origin: { S: "default" },
                         Topic: { S: topic },
                         Status: { S: status },
+                        HeartBeat: {S: heartBeat}
+
                     },
                 };
 
@@ -98,6 +101,7 @@ module.exports = {
                         CreatedDate: { S: createdDate },
                         Topic: { S: topic },
                         Status: { S: status },
+                        HeartBeat: {S: heartBeat}
                     },
                 };
 
@@ -150,6 +154,8 @@ module.exports = {
                 .json({ status: "Fail", message: "Device Not Registered" });
         }
 
+        const heartBeat = Date.now().toString();
+
         const publishParams = {
             topic: thingValue.Topic.S,
             payload: JSON.stringify({
@@ -160,6 +166,7 @@ module.exports = {
                 status,
                 temperature,
                 origin,
+                heartBeat,
                 wattage: thingValue.Wattage.N,
                 powerConsume: thingValue.PowerConsume.N,
                 topic: thingValue.Topic.S, 

@@ -1,73 +1,64 @@
-const awsIot = require("aws-iot-device-sdk");
 const AWS = require("aws-sdk");
-const heartbeatDevice = require('./mydevice');
 
-AWS.config.update({ region: "us-east-2" });
-const ddb = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
-
-// // let deviceData = {};
-// try {
-//   const ThingId = 1695638872030;
-//   const params = {
-//     TableName: "Things",
-//     Key: {
-//       ThingId: { N: ThingId.toString() },
-//     },
-//   };
-
-//   const getDataOfDevice = async () => {
-//     try {
-//       const data = await ddb.getItem(params).promise();
-//       return data; // Return the data directly, no need for Promise.all
-//     } catch (err) {
-//       console.log("Failure", err.message);
-//       throw err; // Re-throw the error to be caught by the outer try-catch block if needed
-//     }
-//   };
-
-//   getDataOfDevice()
-//     .then((res) => {
-//       // console.log("Response: ", res);
-//       heartBeat(res);
-//     })
-//     .catch((err) => {
-//       console.log("Error: ", err);
-//     });
-// } catch (err) {
-//   console.log("Error", err);
-// }
-
-// function heartBeat(deviceData) {
-
-// }
-
-const deviceHeartbeatTimestamps = {};
-console.log(heartbeatDevice);
-
-heartbeatDevice.subscribe(deviceTopic);
-
-heartbeatDevice.on('message', (topic, payload) => {
-    console.log("Topic: ", topic);
-    console.log("Payload: ", payload);
-  // Update the timestamp for the device that sent the heartbeat
-//   const deviceId = extractDeviceIdFromTopic(topic); // Implement this function to extract the device ID from the topic
-//   deviceHeartbeatTimestamps[deviceId] = Date.now();
+AWS.config.update({
+  region: "us-east-2",
 });
 
+const doc = new AWS.DynamoDB.DocumentClient();
 
-// const checkInterval = 5000; // Check every 15 seconds
-// const offlineThreshold = 30000; // Threshold for considering a device offline (30 seconds)
-
-// setInterval(() => {
-//   const currentTime = Date.now();
-
-//   for (const deviceId in deviceHeartbeatTimestamps) {
-//     const lastHeartbeat = deviceHeartbeatTimestamps[deviceId];
-//     if (currentTime - lastHeartbeat >= offlineThreshold) {
-//       // Device is considered offline
-//       console.log(`Device ${deviceId} is offline.`);
-//       // Implement actions to handle offline devices (e.g., update database status)
-//     }
-//   }
-// }, checkInterval);
-
+const val = async () => {
+  const currentTime = Date.now();
+  const offlineThreshold = 10000; // Threshold in milliseconds
+  const data = await doc.scan({ TableName: "Things" }).promise();
+  const connectedDevices = data.Items;
+  for (const item of connectedDevices) {
+    const lastSeenTimestamp = item.HeartBeat;
+    if (currentTime - lastSeenTimestamp > offlineThreshold) {
+      const deviceStatus = "offline";
+      const status = "OFF"
+      console.log("Device disconnected:", item.ThingName);
+      try {
+        // console.log(item.ThingId);
+        if (item.DeviceStatus === "online") {
+          await doc
+            .update({
+              TableName: "Things",
+              Key: { ThingId: item.ThingId },
+              UpdateExpression: "set #ds = :nds, #st = :nst",
+              ExpressionAttributeValues: {
+                ":nds": deviceStatus,
+                ":nst": status,
+              },
+              ExpressionAttributeNames: {
+                "#ds": "DeviceStatus",
+                "#st": "Status",
+              },
+            })
+            .promise();
+        }
+        // console.log(check)
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log(`Device ${item.ThingName} is online`);
+      if (item.DeviceStatus === "offline") {
+        const deviceStatus = "online";
+        await doc
+          .update({
+            TableName: "Things",
+            Key: { ThingId: item.ThingId },
+            UpdateExpression: "set #ds = :nds",
+            ExpressionAttributeValues: {
+              ":nds": deviceStatus,
+            },
+            ExpressionAttributeNames: {
+              "#ds": "DeviceStatus",
+            },
+          })
+          .promise();
+      }
+    }
+  }
+};
+setInterval(val, 3000);
